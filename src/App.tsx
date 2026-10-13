@@ -16,7 +16,7 @@ function MainLayout() {
 
   const { items } = useAppSelector((state) => state.deadlines);
 
-  // Tính số bài tập có hạn nộp vào hôm nay để hiển thị ở "Chi tiết theo ngày"
+  // Tính số bài tập chưa hoàn thành có hạn nộp vào hôm nay
   const todayStr = new Date().toISOString().split('T')[0];
   const todayCount = items.filter((i) => i.dueDate === todayStr && !i.isCompleted).length;
 
@@ -26,68 +26,68 @@ function MainLayout() {
 
   return (
     <div className="app-shell">
-      {/* SIDEBAR */}
+      {/* SIDEBAR BÊN TRÁI */}
       <aside className="sidebar">
         <div className="sidebar-brand">
-          <h2>Quản lý Deadline</h2>
-          <small>Bài thực hành 01</small>
+          <div className="brand-icon">🎓</div>
+          <div>
+            <h2>Deadline Tracker</h2>
+            <small>Quản lý bài tập</small>
+          </div>
         </div>
 
+        {/* Nút thêm bài tập nổi bật */}
         <button className="sidebar-btn-add" onClick={() => setIsModalOpen(true)}>
-          + Thêm bài tập
+          + Thêm bài tập mới
         </button>
 
+        {/* Menu Navigation */}
         <nav className="sidebar-menu">
-          {/* Dashboard: ĐÃ BỎ SỐ ĐẾM */}
           <button
             type="button"
             className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
             onClick={() => setActiveTab('dashboard')}
           >
+            <span className="nav-icon"></span>
             <span>Tổng quan</span>
           </button>
 
-          {/* Chi tiết theo ngày: HIỂN THỊ SỐ BÀI HÔM NAY CẦN LÀM */}
           <button
             type="button"
             className={`nav-item ${activeTab === 'by-date' ? 'active' : ''}`}
             onClick={() => setActiveTab('by-date')}
           >
+            <span className="nav-icon"></span>
             <span>Chi tiết theo ngày</span>
             {todayCount > 0 && <span className="badge-count">{todayCount}</span>}
           </button>
         </nav>
 
         <div className="sidebar-stats">
-          <div className="stats-title">Thống kê</div>
+          <div className="stats-title">Tổng quan</div>
           <div className="stats-row">
-            <span>Tổng số bài:</span>
-            <strong>{total}</strong>
-          </div>
-          <div className="stats-row">
-            <span>Chưa xong:</span>
+            <span>Chờ làm:</span>
             <strong>{total - completed}</strong>
           </div>
           <div className="stats-row">
-            <span>Quá hạn:</span>
-            <strong style={{ color: '#d32f2f' }}>{overdue}</strong>
+            <span>Đã hoàn thành:</span>
+            <strong style={{ color: '#16a34a' }}>{completed}</strong>
           </div>
           <div className="stats-row">
-            <span>Đã xong:</span>
-            <strong style={{ color: '#2e7d32' }}>{completed}</strong>
+            <span>Quá hạn:</span>
+            <strong style={{ color: '#dc2626' }}>{overdue}</strong>
           </div>
         </div>
       </aside>
 
-      {/* NỘI DUNG CHÍNH */}
       <main className="main-viewport">
         <header className="content-topbar">
           <div>
-            <h1>{activeTab === 'dashboard' ? 'Dashboard Tổng Quan' : 'Chi Tiết Theo Ngày'}</h1>
+            <h1>{activeTab === 'dashboard' ? 'Dashboard Tổng Quan' : 'Theo Dõi Theo Ngày'}</h1>
             <p>
               {activeTab === 'dashboard'
-                ? 'Danh sách bài tập và lọc trạng thái hoàn thành'
-                : 'Xem bài tập đến hạn theo từng ngày cụ thể'}
+                ? 'Xem toàn bộ danh sách hạn nộp và lọc theo trạng thái'
+                : 'Tra cứu bài tập theo mốc ngày cụ thể'}
             </p>
           </div>
           {activeTab === 'dashboard' && (
@@ -100,7 +100,7 @@ function MainLayout() {
         {activeTab === 'dashboard' ? (
           <div className="main-content-panel">
             <div className="panel-header-action">
-              <h2>Danh sách bài tập</h2>
+              <h2>Tất cả bài tập</h2>
               <DeadlineFilter />
             </div>
             <DeadlineList />
