@@ -1,0 +1,309 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif; /* Chuyển toàn bộ font về Arial */
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8fafc;
+  color: #334155;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.app-header p {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.main-content-panel {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Danh sách Card Dọc */
+.deadline-vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card-vertical {
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 1. Thẻ bình thường (Còn hạn) */
+.task-card-vertical.card-normal {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.task-card-vertical.card-normal:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* 2. Thẻ ĐÃ HOÀN THÀNH: Nền xanh lá nhạt */
+.task-card-vertical.card-completed {
+  background-color: #f0fdf4;
+  border: 1px solid #86efac;
+}
+.task-card-vertical.card-completed .card-header,
+.task-card-vertical.card-completed .card-footer {
+  border-color: #dcfce7;
+}
+
+/* 3. Thẻ QUÁ HẠN: Nền đỏ nhạt */
+.task-card-vertical.card-overdue {
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+}
+.task-card-vertical.card-overdue .card-header,
+.task-card-vertical.card-overdue .card-footer {
+  border-color: #fee2e2;
+}
+
+/* Card Header, Body, Footer */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 0.5rem;
+}
+
+.subject-badge {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #1d4ed8;
+  background: #eff6ff;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.priority-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.priority-LOW { background: #e2e8f0; color: #475569; }
+.priority-MEDIUM { background: #fef3c7; color: #92400e; }
+.priority-HIGH { background: #fee2e2; color: #b91c1c; }
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.status-badge.overdue { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+.status-badge.remaining { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+.status-badge.done { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+
+.card-body {
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.3rem;
+  text-decoration: none !important; /* Không bao giờ gạch ngang */
+}
+
+.card-date {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.card-desc-preview {
+  font-size: 0.825rem;
+  color: #64748b;
+  margin-top: 0.35rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  text-decoration: underline;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  gap: 6px;
+}
+.filter-btn {
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  cursor: pointer;
+}
+.filter-btn.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* Nút bấm chung */
+.btn-submit {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0.55rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn-submit:hover {
+  background: #1d4ed8;
+}
+
+.btn-cancel {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.modal-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1.25rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  outline: none;
+}
